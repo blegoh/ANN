@@ -11,6 +11,10 @@ class Ann
 
     private $learningRate;
 
+    private $inputs;
+
+    private $outputs;
+
     /**
      * Ann constructor.
      */
@@ -18,6 +22,24 @@ class Ann
     {
         $this->learningRate = 0.01;
     }
+
+    /**
+     * @param mixed $inputs
+     */
+    public function setInputs($inputs)
+    {
+        $this->inputs[] = $inputs;
+    }
+
+    /**
+     * @param mixed $outputs
+     */
+    public function setOutputs($outputs)
+    {
+        $this->outputs[] = $outputs;
+    }
+
+
 
     /**
      * @param array $input
