@@ -15,6 +15,10 @@ class Ann
 
     private $outputs;
 
+    private $weighs;
+
+    private $epoch;
+
     /**
      * Ann constructor.
      */
@@ -55,18 +59,25 @@ class Ann
         return $transpose;
     }
 
+    /**
+     * a x b
+     * @param array $a
+     * @param array $b
+     */
     public function multiple(Array $a, Array $b)
     {
         $result = [];
-        for ($i=0;$i<count($b);$i++){
-            for($j=0;$j<count($b);$j++){
+        for ($i=0;$i<count($a);$i++){
+            for($j=0;$j<count($a);$j++){
                 $total = 0;
                 for ($k=0;$k<count($b);$k++){
-                    $total += $a[$i][$k] + $a[$k][$j];
+                    $total += ($a[$i][$k] * $b[$k][$j]);
                 }
+                echo $total."\n";
                 $result[$i][$i] = $total;
             }
         }
+        return $result;
     }
 
 }
