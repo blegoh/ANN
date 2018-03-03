@@ -15,9 +15,14 @@ class Ann
 
     private $outputs;
 
+    /**
+     * @var weigth and bias
+     */
     private $weighs;
 
     private $epoch;
+
+    private $interestingClass;
 
     /**
      * Ann constructor.
@@ -25,12 +30,42 @@ class Ann
     public function __construct()
     {
         $this->learningRate = 0.01;
+        $this->weighs = [
+            -1230,-30,300
+        ];
     }
 
     /**
-     * @param mixed $inputs
+     * @param mixed $interestingClass
      */
-    public function setInputs($inputs)
+    public function setInterestingClass($interestingClass)
+    {
+        $this->interestingClass = $interestingClass;
+    }
+
+    public function train()
+    {
+        $i = 0;
+        foreach ($this->inputs as $input) {
+            $bias = [1];
+            var_dump($input);
+            $input = array_merge($bias,$input);
+            $sum = $this->multiple($this->transpose($this->weighs),$input);
+            $hasil = $this->activationFunction($this->outputs[$i++]);
+            echo $hasil;
+        }
+    }
+
+    private function activationFunction($output)
+    {
+        return ($output > 0 ) ? 1 : 0;
+    }
+
+
+    /**
+     * @param array $inputs
+     */
+    public function setInputs(Array $inputs)
     {
         $this->inputs[] = $inputs;
     }
@@ -43,12 +78,10 @@ class Ann
         $this->outputs[] = $outputs;
     }
 
-
-
     /**
      * @param array $input
      */
-    public function transpose(Array $input)
+    private function transpose(Array $input)
     {
         $transpose = [];
         foreach ($input as $key => $item) {
@@ -64,7 +97,7 @@ class Ann
      * @param array $a
      * @param array $b
      */
-    public function multiple(Array $a, Array $b)
+    private function multiple(Array $a, Array $b)
     {
         $result = [];
         for ($i=0;$i<count($a);$i++){
