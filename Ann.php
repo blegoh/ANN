@@ -48,6 +48,9 @@ class Ann
         $this->interestingClass = $interestingClass;
     }
 
+    /**
+     * input ditulis dr atas ke bawah
+     */
     public function train()
     {
         $i = 0;
@@ -59,6 +62,16 @@ class Ann
             echo json_encode($hasil) . " i = $i \n";
             $i++;
         }
+    }
+
+    /**
+     * w(n+1) = w(n)+ learningrate[d(n)-y(n)]X(n)
+     * @param $index
+     */
+    private function recalculate($index,$predict,$actual)
+    {
+        $this->n++;
+
     }
 
     public function activationFunction($output)
