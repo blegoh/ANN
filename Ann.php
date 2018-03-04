@@ -25,13 +25,18 @@ class Ann
     private $interestingClass;
 
     /**
+     * @var n step in recalculating weight
+     */
+    private $n;
+
+    /**
      * Ann constructor.
      */
     public function __construct()
     {
         $this->learningRate = 0.01;
-        $this->weighs = [
-            -1230,-30,300
+        $this->weighs[] = [
+            -1230, -30, 300
         ];
     }
 
@@ -48,17 +53,22 @@ class Ann
         $i = 0;
         foreach ($this->inputs as $input) {
             $bias = [1];
-            var_dump($input);
-            $input = array_merge($bias,$input);
-            $sum = $this->multiple($this->transpose($this->weighs),$input);
-            $hasil = $this->activationFunction($this->outputs[$i++]);
-            echo $hasil;
+            $a = [array_merge($bias, $input)];
+            $sum = $this->multiple($this->weighs, $this->transpose($a));
+            $hasil = $this->activationFunction($sum);
+            echo json_encode($hasil) . " i = $i \n";
+            $i++;
         }
     }
 
-    private function activationFunction($output)
+    public function activationFunction($output)
     {
-        return ($output > 0 ) ? 1 : 0;
+        for ($i = 0; $i < count($output); $i++) {
+            for ($j = 0; $j < count($output[$i]); $j++) {
+                $output[$i][$j] = ($output[$i][$j] > 0) ? 1 : -1;
+            }
+        }
+        return $output;
     }
 
 
@@ -100,14 +110,13 @@ class Ann
     private function multiple(Array $a, Array $b)
     {
         $result = [];
-        for ($i=0;$i<count($a);$i++){
-            for($j=0;$j<count($a);$j++){
+        for ($i = 0; $i < count($a); $i++) {
+            for ($j = 0; $j < count($a); $j++) {
                 $total = 0;
-                for ($k=0;$k<count($b);$k++){
+                for ($k = 0; $k < count($b); $k++) {
                     $total += ($a[$i][$k] * $b[$k][$j]);
                 }
-                echo $total."\n";
-                $result[$i][$i] = $total;
+                $result[$i][$j] = $total;
             }
         }
         return $result;
