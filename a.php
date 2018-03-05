@@ -9,9 +9,18 @@
 include "Ann.php";
 
 $s = new Ann();
-$a = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,9]
-];
-print_r($s->transpose($a));
+
+$s->setInterestingClass(1);
+
+$s->setInputs([121,16.8]);
+$s->setInputs([114,15.2]);
+$s->setInputs([210,9.4]);
+$s->setInputs([195,8.1]);
+
+$s->setOutputs(1);
+$s->setOutputs(1);
+$s->setOutputs(2);
+$s->setOutputs(2);
+
+$s->train();
+//echo $s->activationFunction(-123);
