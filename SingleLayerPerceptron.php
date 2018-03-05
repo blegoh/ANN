@@ -6,7 +6,7 @@
  * Time: 2:02
  */
 
-class Ann
+class SingleLayerPerceptron
 {
 
     private $learningRate;
@@ -38,6 +38,7 @@ class Ann
         $this->weighs[] = [
             -1230, -30, 300
         ];
+        $this->epoch = 2;
     }
 
     /**
@@ -59,7 +60,7 @@ class Ann
             $a = [array_merge($bias, $input)];
             $sum = $this->multiple($this->weighs, $this->transpose($a));
             $hasil = $this->activationFunction($sum);
-            echo json_encode($hasil) . " i = $i \n";
+            echo json_encode($hasil) . " i = ".json_encode($this->outputs[$i]) ."\n";
             $i++;
         }
     }
@@ -78,7 +79,7 @@ class Ann
     {
         for ($i = 0; $i < count($output); $i++) {
             for ($j = 0; $j < count($output[$i]); $j++) {
-                $output[$i][$j] = ($output[$i][$j] > 0) ? 1 : -1;
+                $output[$i][$j] = ($output[$i][$j] > 0) ? 1 : 0;
             }
         }
         return $output;
