@@ -6,9 +6,9 @@
  * Time: 2:23
  */
 
-include "Ann.php";
+include "SingleLayerPerceptron.php";
 
-$s = new Ann();
+$s = new SingleLayerPerceptron();
 
 $s->setInterestingClass(1);
 
@@ -23,4 +23,7 @@ $s->setOutputs(2);
 $s->setOutputs(2);
 
 $s->train();
+/*$qwe = [[1,2,3],[1,2,3],[1,2,3]];
+$wea = [[4,2,6],[1,7,3],[1,2,5]];
+echo json_encode($s->minus($qwe,$wea));*/
 //echo $s->activationFunction(-123);
