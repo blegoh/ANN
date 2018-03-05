@@ -72,7 +72,11 @@ class SingleLayerPerceptron
     private function recalculate($index,$predict,$actual)
     {
         $this->n++;
+        if ($predict > $actual){
 
+        }else{
+
+        }
     }
 
     public function activationFunction($output)
@@ -82,7 +86,7 @@ class SingleLayerPerceptron
                 $output[$i][$j] = ($output[$i][$j] > 0) ? 1 : 0;
             }
         }
-        return $output;
+        return $output[0][0];
     }
 
 
@@ -134,6 +138,33 @@ class SingleLayerPerceptron
             }
         }
         return $result;
+    }
+
+    /**
+     * @param array $a
+     * @param array $b
+     */
+    public function sum(Array $a, Array $b){
+        for ($i = 0; $i < count($a); $i++) {
+            for ($j = 0; $j < count($a[$i]); $j++) {
+                $c[$i][$j] = $a[$i][$j] + $b[$i][$j];
+            }
+        }
+        return $c;
+    }
+
+    /**
+     * @param array $a
+     * @param array $b
+     * @return mixed
+     */
+    public function minus(Array $a, Array $b){
+        for ($i = 0; $i < count($a); $i++) {
+            for ($j = 0; $j < count($a[$i]); $j++) {
+                $c[$i][$j] = $a[$i][$j] - $b[$i][$j];
+            }
+        }
+        return $c;
     }
 
 }
