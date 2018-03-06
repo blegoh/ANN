@@ -15,5 +15,11 @@
   "require": {
     "php": "^7.0",
     "mthenw/nosqlite": "*@stable"
-  }
+  },
+  "autoload": {
+    "psr-4": {
+      "Blegoh\\ANN\\": "src/"
+    }
+  },
+  "minimum-stability": "stable"
 }
