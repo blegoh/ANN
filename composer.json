@@ -1,0 +1,5 @@
+{
+  "require": {
+    "mthenw/nosqlite": "*@stable"
+  }
+}
