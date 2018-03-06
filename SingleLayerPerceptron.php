@@ -24,7 +24,7 @@ class SingleLayerPerceptron
 
     private $interestingClass;
 
-    private $db;
+    private $nsql;
 
     /**
      * @var n step in recalculating weight
@@ -41,7 +41,7 @@ class SingleLayerPerceptron
             rand(-100,100), rand(-100,100), rand(-100,100)
         ];
         $this->epoch = 1000;
-        $this->db = 'mysql';
+        $this->nsql = new NoSQLite\NoSQLite('mydb.sqlite');
     }
 
     /**
@@ -73,6 +73,7 @@ class SingleLayerPerceptron
                 $i++;
             }
         }
+        echo json_encode($this->weighs)." \n";
     }
 
     /**
@@ -193,6 +194,19 @@ class SingleLayerPerceptron
             }
         }
         return $c;
+    }
+
+    public function save()
+    {
+        $store = $this->nsql->getStore('weights');
+        $store->deleteAll();
+        $store->set("1", json_encode($this->weighs));
+    }
+
+    public function load()
+    {
+        $store = $this->nsql->getStore('weights');
+        $this->weighs = json_decode($store->get("1"));
     }
 
 }
