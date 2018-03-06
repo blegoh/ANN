@@ -7,7 +7,6 @@
  */
 
 include "vendor/autoload.php";
-include "SingleLayerPerceptron.php";
 
 
 $s = new SingleLayerPerceptron();
