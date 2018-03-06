@@ -38,9 +38,9 @@ class SingleLayerPerceptron
     {
         $this->learningRate = 0.01;
         $this->weighs[] = [
-            -1230, -30, 300
+            rand(-100,100), rand(-100,100), rand(-100,100)
         ];
-        $this->epoch = 2;
+        $this->epoch = 1000;
         $this->db = 'mysql';
     }
 
@@ -69,6 +69,7 @@ class SingleLayerPerceptron
                     $this->recalculate($i, $hasil, $o);
                 }
                 echo json_encode($hasil) . " i = " . json_encode($this->outputs[$i]) . "\n";
+                echo json_encode($this->weighs) . " \n";
                 $i++;
             }
         }
