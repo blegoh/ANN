@@ -1,7 +1,6 @@
 {
   "name": "blegoh/ann",
   "description": "simple ann library",
-  "version": "1.0.0",
   "type": "library",
   "license": "MIT",
   "keywords": ["ann", "perceptron", "laravel"],
