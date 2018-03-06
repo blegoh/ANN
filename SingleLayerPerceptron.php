@@ -68,8 +68,6 @@ class SingleLayerPerceptron
                 if ($hasil != $o) {
                     $this->recalculate($i, $hasil, $o);
                 }
-                echo json_encode($hasil) . " i = " . json_encode($this->outputs[$i]) . "\n";
-                echo json_encode($this->weighs) . " \n";
                 $i++;
             }
         }
