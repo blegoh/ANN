@@ -1,6 +1,17 @@
 {
   "name": "blegoh/ann",
   "description": "simple ann library",
+  "version": "1.0.0",
+  "type": "library",
+  "license": "MIT",
+  "keywords": ["ann", "perceptron", "laravel"],
+  "authors": [
+    {
+      "name": "Yusuf Eka Sayogana",
+      "email": "yusufblegoh@gmail.com",
+      "homepage": "http://yusufsayogana.me"
+    }
+  ],
   "require": {
     "php": "^7.0",
     "mthenw/nosqlite": "*@stable"
