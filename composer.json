@@ -20,5 +20,5 @@
       "Blegoh\\ANN\\": "src/"
     }
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "dev"
 }
