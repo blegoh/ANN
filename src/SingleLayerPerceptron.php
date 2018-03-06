@@ -34,12 +34,14 @@ class SingleLayerPerceptron
     /**
      * Ann constructor.
      */
-    public function __construct()
+    public function __construct($numOfInput = 2)
     {
         $this->learningRate = 0.01;
-        $this->weighs[] = [
-            rand(-100,100), rand(-100,100), rand(-100,100)
-        ];
+        $weigh = [];
+        for ($i=0;$i<=$numOfInput;$i++){
+            $weigh[] = rand(-100,100);
+        }
+        $this->weighs[] = $weigh;
         $this->epoch = 1000;
         $this->nsql = new NoSQLite\NoSQLite('mydb.sqlite');
     }
