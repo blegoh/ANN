@@ -24,6 +24,8 @@ class SingleLayerPerceptron
 
     private $interestingClass;
 
+    private $db;
+
     /**
      * @var n step in recalculating weight
      */
@@ -39,6 +41,7 @@ class SingleLayerPerceptron
             -1230, -30, 300
         ];
         $this->epoch = 2;
+        $this->db = 'mysql';
     }
 
     /**
@@ -54,18 +57,20 @@ class SingleLayerPerceptron
      */
     public function train()
     {
-        $i = 0;
-        foreach ($this->inputs as $input) {
-            $bias = [1];
-            $a = [array_merge($bias, $input)];
-            $sum = $this->multiple($this->weighs, $this->transpose($a));
-            $hasil = $this->activationFunction($sum);
-            $o = ($this->outputs[$i] == $this->interestingClass) ? 1 : 0;
-            if ($hasil != $o){
-                $this->recalculate($i,$hasil,$o);
+        for ($k = 0; $k < $this->epoch; $k++) {
+            $i = 0;
+            foreach ($this->inputs as $input) {
+                $bias = [1];
+                $a = [array_merge($bias, $input)];
+                $sum = $this->multiple($this->weighs, $this->transpose($a));
+                $hasil = $this->activationFunction($sum);
+                $o = ($this->outputs[$i] == $this->interestingClass) ? 1 : 0;
+                if ($hasil != $o) {
+                    $this->recalculate($i, $hasil, $o);
+                }
+                echo json_encode($hasil) . " i = " . json_encode($this->outputs[$i]) . "\n";
+                $i++;
             }
-//            echo json_encode($hasil) . " i = ".json_encode($this->outputs[$i]) ."\n";
-            $i++;
         }
     }
 
@@ -73,16 +78,16 @@ class SingleLayerPerceptron
      * w(n+1) = w(n)+ learningrate[d(n)-y(n)]X(n)
      * @param $index
      */
-    private function recalculate($index,$predict,$actual)
+    private function recalculate($index, $predict, $actual)
     {
         $this->n++;
         $input = [array_merge([1],$this->inputs[$index])];
-        echo json_encode($this->multipleScalar($this->learningRate,$this->transpose($input)))." \n";
         if ($predict > $actual){
             $a = $this->minus($this->transpose($this->weighs),$this->multipleScalar($this->learningRate,$this->transpose($input)));
         }else{
             $a = $this->sum($this->transpose($this->weighs),$this->multipleScalar($this->learningRate,$this->transpose($input)));
         }
+        $this->weighs = $this->transpose($a);
     }
 
     public function activationFunction($output)
@@ -150,10 +155,11 @@ class SingleLayerPerceptron
      * @param $a
      * @param array $b
      */
-    private function multipleScalar($a, Array $b){
+    private function multipleScalar($a, Array $b)
+    {
         for ($i = 0; $i < count($b); $i++) {
             for ($j = 0; $j < count($b[$i]); $j++) {
-                $b[$i][$j] = $b[$i][$j]*$a;
+                $b[$i][$j] = $b[$i][$j] * $a;
             }
         }
         return $b;
@@ -163,7 +169,8 @@ class SingleLayerPerceptron
      * @param array $a
      * @param array $b
      */
-    public function sum(Array $a, Array $b){
+    public function sum(Array $a, Array $b)
+    {
         for ($i = 0; $i < count($a); $i++) {
             for ($j = 0; $j < count($a[$i]); $j++) {
                 $c[$i][$j] = $a[$i][$j] + $b[$i][$j];
@@ -177,7 +184,8 @@ class SingleLayerPerceptron
      * @param array $b
      * @return mixed
      */
-    public function minus(Array $a, Array $b){
+    public function minus(Array $a, Array $b)
+    {
         for ($i = 0; $i < count($a); $i++) {
             for ($j = 0; $j < count($a[$i]); $j++) {
                 $c[$i][$j] = $a[$i][$j] - $b[$i][$j];
