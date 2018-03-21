@@ -14,7 +14,7 @@ class NumPHP
      * @param array $a
      * @param array $b
      */
-    private function multiple(Array $a, Array $b)
+    private static function multiple(Array $a, Array $b)
     {
         $result = [];
         for ($i = 0; $i < count($a); $i++) {
@@ -33,7 +33,7 @@ class NumPHP
      * @param $a
      * @param array $b
      */
-    private function multipleScalar($a, Array $b)
+    private static function multipleScalar($a, Array $b)
     {
         for ($i = 0; $i < count($b); $i++) {
             for ($j = 0; $j < count($b[$i]); $j++) {
