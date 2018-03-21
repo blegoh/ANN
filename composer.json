@@ -12,7 +12,8 @@
     }
   ],
   "require": {
-    "mthenw/nosqlite": "*@stable"
+    "mthenw/nosqlite": "*@stable",
+    "psy/psysh": "@stable"
   },
   "autoload": {
     "psr-4": {
