@@ -201,12 +201,14 @@ class SingleLayerPerceptron
         $store = $this->nsql->getStore('weights');
         $store->deleteAll();
         $store->set("1", json_encode($this->weighs));
+        echo json_encode($this->weighs);
     }
 
     public function load()
     {
         $store = $this->nsql->getStore('weights');
         $this->weighs = json_decode($store->get("1"));
+        echo json_encode($this->weighs);
     }
 
 }
