@@ -210,5 +210,10 @@ class SingleLayerPerceptron
         $this->weighs = json_decode($store->get("1"));
         echo json_encode($this->weighs);
     }
+    
+    public function cobaDulu()
+    {
+        echo json_encode(dd($this->weighs));
+    }    
 
 }
